@@ -59,32 +59,32 @@ namespace :vlad do
     the update.".cleanup
 
   remote_task :update, :roles => :app do
-    symlink = false
+    commands = [
+      "umask #{umask}",
+      "cd #{scm_path}",
+      "#{source.checkout revision, scm_path}",
+      "#{source.export revision, release_path}",
+      "chmod -R g+w #{latest_release}",
+    ]
+    unless shared_paths.empty?
+      commands << "rm -rf #{shared_paths.values.map { |p| File.join(latest_release, p) }.join(' ')}"
+    end
+    unless mkdirs.empty?
+      dirs = mkdirs.map { |d| File.join(latest_release, d) }.join(' ')
+      commands << "mkdir -p #{dirs}"
+      commands << "chown -R #{perm_owner} #{dirs}" if perm_owner
+      commands << "chgrp -R #{perm_group} #{dirs}" if perm_group
+    end
+
+    commands << "chown -R #{perm_owner} #{latest_release}" if perm_owner
+    commands << "chgrp -R #{perm_group} #{latest_release}" if perm_group
+
+    run commands.join(" && ")
+    Rake::Task['vlad:update_symlinks'].invoke
+  end
+
+  remote_task :symlink_release, :roles => :app do
     begin
-      commands = [
-        "umask #{umask}",
-        "cd #{scm_path}",
-        "#{source.checkout revision, scm_path}",
-        "#{source.export revision, release_path}",
-        "chmod -R g+w #{latest_release}",
-      ]
-      unless shared_paths.empty?
-        commands << "rm -rf #{shared_paths.values.map { |p| File.join(latest_release, p) }.join(' ')}"
-      end
-      unless mkdirs.empty?
-        dirs = mkdirs.map { |d| File.join(latest_release, d) }.join(' ')
-        commands << "mkdir -p #{dirs}"
-        commands << "chown -R #{perm_owner} #{dirs}" if perm_owner
-        commands << "chgrp -R #{perm_group} #{dirs}" if perm_group
-      end
-
-      commands << "chown -R #{perm_owner} #{latest_release}" if perm_owner
-      commands << "chgrp -R #{perm_group} #{latest_release}" if perm_group
-
-      run commands.join(" && ")
-      Rake::Task['vlad:update_symlinks'].invoke
-
-      symlink = true
       commands = [
         "umask #{umask}",
         "rm -f #{current_path}",
@@ -96,8 +96,7 @@ namespace :vlad do
 
       run commands.join(' && ')
     rescue => e
-      run "rm -f #{current_path} && ln -s #{previous_release} #{current_path}" if
-        symlink
+      run "rm -f #{current_path} && ln -s #{previous_release} #{current_path}"
       run "rm -rf #{release_path}"
       raise e
     end
