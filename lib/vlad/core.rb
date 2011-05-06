@@ -88,7 +88,7 @@ namespace :vlad do
       commands = [
         "umask #{umask}",
         "rm -f #{current_path}",
-        "ln -s #{latest_release} #{current_path}",
+        "ln -s #{current_release} #{current_path}",
         "echo #{now} $USER #{revision} #{File.basename(release_path)} >> #{deploy_to}/revisions.log"
       ]
       commands << "chown #{perm_owner} #{deploy_to}/revisions.log" if perm_owner
