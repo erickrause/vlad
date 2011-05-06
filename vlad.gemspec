@@ -15,12 +15,12 @@ and standard tools like ssh and rsync.
 Impale your application on the heartless spike of the Deployer.}
   s.email = ["ryand-ruby@zenspider.com", "drbrain@segment7.net", "wilson@supremetyrant.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt", "considerations.txt", "doco/deploying-merb-with-vlad.txt", "doco/deploying-sinatra-with-vlad.txt", "doco/faq.txt", "doco/getting_started.txt", "doco/migration.txt", "doco/perforce.txt", "doco/variables.txt"]
-  s.files = [".autotest", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "considerations.txt", "doco/deploying-merb-with-vlad.txt", "doco/deploying-sinatra-with-vlad.txt", "doco/faq.txt", "doco/getting_started.txt", "doco/migration.txt", "doco/perforce.txt", "doco/variables.txt", "lib/vlad.rb", "lib/vlad/apache.rb", "lib/vlad/core.rb", "lib/vlad/maintenance.rb", "lib/vlad/passenger.rb", "lib/vlad/rails.rb", "lib/vlad/subversion.rb", "test/test_vlad.rb", "test/test_vlad_subversion.rb", "vladdemo.sh", ".gemtest"]
+  s.files = [".autotest", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "considerations.txt", "doco/deploying-merb-with-vlad.txt", "doco/deploying-sinatra-with-vlad.txt", "doco/faq.txt", "doco/getting_started.txt", "doco/migration.txt", "doco/perforce.txt", "doco/variables.txt", "lib/vlad.rb", "lib/vlad/apache.rb", "lib/vlad/core.rb", "lib/vlad/maintenance.rb", "lib/vlad/passenger.rb", "lib/vlad/rails.rb", "lib/vlad/subversion.rb", "test/test_vlad.rb", "test/test_vlad_subversion.rb", "vladdemo.sh"]
   s.homepage = %q{http://rubyhitsquad.com/}
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{hitsquad}
-  s.rubygems_version = %q{1.5.2}
+  s.rubygems_version = %q{1.8.1}
   s.summary = %q{Vlad the Deployer is pragmatic application deployment automation, without mercy}
   s.test_files = ["test/test_vlad.rb", "test/test_vlad_subversion.rb"]
 
