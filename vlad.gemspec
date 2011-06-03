@@ -28,7 +28,7 @@ Impale your application on the heartless spike of the Deployer.}
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rake>, ["~> 0.8.0"])
+      s.add_runtime_dependency(%q<rake>, [">= 0.8.0"])
       s.add_runtime_dependency(%q<rake-remote_task>, ["~> 2.0"])
       s.add_runtime_dependency(%q<open4>, ["~> 0.9.0"])
       s.add_development_dependency(%q<hoe>, [">= 2.9.4"])
